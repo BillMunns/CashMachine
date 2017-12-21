@@ -1,0 +1,7 @@
+C:\Users\William\Documents\Visual Studio 2012\Projects\CashMachine\CashMachineTest\bin\Debug\CashMachineTest.dll
+C:\Users\William\Documents\Visual Studio 2012\Projects\CashMachine\CashMachineTest\bin\Debug\CashMachineTest.pdb
+C:\Users\William\Documents\Visual Studio 2012\Projects\CashMachine\CashMachineTest\bin\Debug\CashMachine.exe
+C:\Users\William\Documents\Visual Studio 2012\Projects\CashMachine\CashMachineTest\bin\Debug\CashMachine.pdb
+C:\Users\William\Documents\Visual Studio 2012\Projects\CashMachine\CashMachineTest\obj\Debug\CashMachineTest.csprojResolveAssemblyReference.cache
+C:\Users\William\Documents\Visual Studio 2012\Projects\CashMachine\CashMachineTest\obj\Debug\CashMachineTest.dll
+C:\Users\William\Documents\Visual Studio 2012\Projects\CashMachine\CashMachineTest\obj\Debug\CashMachineTest.pdb
