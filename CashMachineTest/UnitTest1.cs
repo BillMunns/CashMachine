@@ -49,7 +49,18 @@ namespace CashMachineTest
                 ATM machine = new ATM();
                 machine.Withdraw("W $200");
                 machine.Withdraw("W $37");
-                Assert.AreEqual("Success: Dispensed $200\r\n\r\nMachine Balance:\r\n$100 - 8\r\n$50 - 10\r\n$20 - 10\r\n$10 - 10\r\n$5 - 10\r\n$1 - 10\r\nSuccess: Dispensed $37\r\n\r\nMachine Balance:\r\n$100 - 8\r\n$50 - 10\r\n$20 - 9\r\n$10 - 9\r\n$5 - 9\r\n$1 - 8\r\n", sw.ToString());
+                Assert.AreEqual("Success: Dispensed $200\r\n\r\nMachine Balance:\r\n$100 - 8\r\n$50 - 10\r\n$20 - 10\r\n$10 - 10\r\n$5 - 10\r\n$1 - 10\r\n\r\n\r\nSuccess: Dispensed $37\r\n\r\nMachine Balance:\r\n$100 - 8\r\n$50 - 10\r\n$20 - 9\r\n$10 - 9\r\n$5 - 9\r\n$1 - 8\r\n\r\n\r\n", sw.ToString());
+            }
+        }
+        [TestMethod]
+        public void TestWithdraw_EXTRACHARS()
+        {
+            using (System.IO.StringWriter sw = new System.IO.StringWriter())
+            {
+                Console.SetOut(sw);
+                ATM machine = new ATM();
+                machine.Withdraw("WE $200");
+                Assert.AreEqual("Invalid Command", sw.ToString().Substring(0, sw.ToString().IndexOf("\r\n")));
             }
         }
         [TestMethod]
@@ -60,7 +71,7 @@ namespace CashMachineTest
                 Console.SetOut(sw);
                 ATM machine = new ATM();
                 machine.InquirySelected("I $50");
-                Assert.AreEqual("Machine Balance:\r\n$50 - 10\r\n", sw.ToString());
+                Assert.AreEqual("Machine Balance:\r\n$50 - 10\r\n\r\n\r\n", sw.ToString());
             }
         }
         [TestMethod]
@@ -71,7 +82,7 @@ namespace CashMachineTest
                 Console.SetOut(sw);
                 ATM machine = new ATM();
                 machine.InquirySelected("I $10 $5 $100");
-                Assert.AreEqual("Machine Balance:\r\n$10 - 10\r\n$5 - 10\r\n$100 - 10\r\n", sw.ToString());
+                Assert.AreEqual("Machine Balance:\r\n$10 - 10\r\n$5 - 10\r\n$100 - 10\r\n\r\n\r\n", sw.ToString());
             }
         }
         [TestMethod]
@@ -83,17 +94,28 @@ namespace CashMachineTest
                 ATM machine = new ATM();
                 machine.Withdraw("W $1015");
                 machine.InquirySelected("I $10 $5 $100 $1");
-                Assert.AreEqual("Success: Dispensed $1015\r\n\r\nMachine Balance:\r\n$100 - 0\r\n$50 - 10\r\n$20 - 10\r\n$10 - 9\r\n$5 - 9\r\n$1 - 10\r\nMachine Balance:\r\n$10 - 9\r\n$5 - 9\r\n$100 - 0\r\n$1 - 10\r\n", sw.ToString());
+                Assert.AreEqual("Success: Dispensed $1015\r\n\r\nMachine Balance:\r\n$100 - 0\r\n$50 - 10\r\n$20 - 10\r\n$10 - 9\r\n$5 - 9\r\n$1 - 10\r\n\r\n\r\nMachine Balance:\r\n$10 - 9\r\n$5 - 9\r\n$100 - 0\r\n$1 - 10\r\n\r\n\r\n", sw.ToString());
             }
         }
         [TestMethod]
-        public void TestInquiry_BAD()
+        public void TestInquiry_BAD1()
         {
             using (System.IO.StringWriter sw = new System.IO.StringWriter())
             {
                 Console.SetOut(sw);
                 ATM machine = new ATM();
                 machine.InquirySelected("I $25");
+                Assert.AreEqual("Invalid Command", sw.ToString().Substring(0, sw.ToString().IndexOf("\r\n")));
+            }
+        }
+        [TestMethod]
+        public void TestInquiry_BAD2EXTRACHARS()
+        {
+            using (System.IO.StringWriter sw = new System.IO.StringWriter())
+            {
+                Console.SetOut(sw);
+                ATM machine = new ATM();
+                machine.InquirySelected("ILL $20");
                 Assert.AreEqual("Invalid Command", sw.ToString().Substring(0, sw.ToString().IndexOf("\r\n")));
             }
         }

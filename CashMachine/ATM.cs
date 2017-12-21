@@ -66,12 +66,19 @@ namespace CashMachine
             }
             catch
             {
-                Console.WriteLine("Invalid Command \r\n");
+                Console.WriteLine("Invalid Command\r\n");
             }
         }
 
         public void Withdraw(string command)
         {   //Withdraws that amount from the cash machine and adjusts remaining balance
+
+            if (command.Length > 1 && command[1] != ' ')                    // ensure that we're "W $xxx" not "Wx $xxx"
+            {
+                Console.WriteLine("Invalid Command\r\n");
+                return;
+            }
+
             try
             {
                 int amount = Convert.ToInt32(command.Split('$')[1]);        // parse out int from $xxx string
@@ -102,8 +109,13 @@ namespace CashMachine
 
         }
         
-        public void ReloadATM()
+        public void ReloadATM(string command)
         {
+            if (command.Length > 1)
+            {
+                Console.WriteLine("Invalid Command\r\n");
+                return;
+            }
             try
             {
                 foreach (var key in cashOnHand.Keys.ToList())
@@ -134,6 +146,7 @@ namespace CashMachine
         {   // validate that all values in array begin with "$" 
             try
             {
+
                 string prefix = new string(amounts.Select(s => s[0]).ToArray());
                 if (prefix.Replace("$", "").Length == 0)
                 {

@@ -20,7 +20,7 @@ namespace CashMachine
                 switch (command.ToUpper().ToCharArray()[0])
                 {
                     case 'R':
-                        bank.ReloadATM();
+                        bank.ReloadATM(command);
                         break;
                     case 'W':
                         bank.Withdraw(command);
@@ -29,8 +29,16 @@ namespace CashMachine
                         bank.InquirySelected(command);
                         break;
                     case 'Q':
-                        Environment.Exit(0);
-                        break;
+                        if (command.Length > 1)
+                        {
+                            Console.WriteLine("Invalid Command\r\n");
+                            break;
+                        }
+                        else
+                        {
+                            Environment.Exit(0);
+                            break;
+                        }
                     case 'J':
                         //must... resist... urge... to... joke...
                         //Console.WriteLine("");
